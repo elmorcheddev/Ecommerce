@@ -1,0 +1,92 @@
+<html
+        :
+        class="light-style customizer-hide"
+        data-assets-path="/"
+        data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
+        xmlns:th="https://www.thymeleaf.org/"
+
+>
+<head th:replace="fragment :: header">
+</head>
+
+<body>
+
+
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <h1><b>Sign-in</b></h1>
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        <p>invalid Email or password</p>
+
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        <p>logout with success</p>
+
+                    </div>
+
+                    <form th:action="@{/do-login}" class="mb-3" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">Email or Username</label>
+                            <input
+                                    autofocus
+                                    class="form-control"
+                                    id="username"
+                                    name="username"
+                                    placeholder="Enter your email or username"
+                                    type="text"
+                            />
+                        </div>
+                        <div class="mb-3 form-password-toggle">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label" for="password">Password</label>
+                                <a th:href="@{forgot-password}">
+                                    <small>Forgot Password?</small>
+                                </a>
+                            </div>
+                            <div class="input-group input-group-merge">
+                                <input
+                                        aria-describedby="password"
+                                        class="form-control"
+                                        id="password"
+                                        name="password"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        type="password"
+                                />
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" id="remember-me" type="checkbox"/>
+                                <label class="form-check-label" for="remember-me"> Remember Me </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                        </div>
+                    </form>
+
+                    <p class="text-center">
+                        <span>New on our platform?</span>
+                        <a th:href="@{register}">
+                            <span>Create an account</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!-- /Register -->
+        </div>
+    </div>
+</div>
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-template="vertical-menu-template-free"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragment :: header"></head>
+<body>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <div th:replace="fragment :: aside"></div>
+        <div class="layout-page">
+            <div th:replace="fragment :: navbar"></div>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product /</span> List Of All
+                        Products</h4>
+                          <span>
+                           <a th:href="@{/addproduct}" class="btn rounded-pill btn-outline-primary">Add Product</a>
+                          </span>
+                          <br><br>
+						<div  class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
+						  <p th:text="${success}"></p>     
+						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						                     
+						  </div>
+						  <div class="alert alert-danger alert-dismissible fade show" role="alert"  th:if="${failed}">
+						  <p th:text="${failed}"></p> 
+						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						                         
+						  </div>
+     
+                       
+                     
+                         <p th:if="${size==0}" class="alert alert-warning text-center"> There's no Product exist
+                         </p>
+                      
+                        <h5>PRODUCT LIST <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20"
+                       th:text="${size}"></span></h5>
+                      
+                 
+                        <table  th:if="${size>0}">
+                            <thead>
+                            <tr>
+                                
+                                <th>IMAGE PRODUCT</th>
+                                <th>PRODUCT NAME</th>
+                                <th>PRODUCT BRAND</th>
+                                <th>PRODUCT CATEGORY</th>
+                                <th>PRODUCT PRICE</th>
+                                <th>PRODUCT QUANTITY</th>
+                                <th>OPERATION</th>
+                                <th>ACTION </th>
+                                 <th> </th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-2" >
+                            <tr th:each="prod :${products}">
+                            
+                                <td>
+          <img  class="w-px-40 h-auto rounded-circle" style="height :40px ; width:40px; " th:src="*{'data:image/jpeg;base64,' + {prod.image}}"> 
+                                 </td>
+                                <td th:text="${prod.name_prod}"> </td>
+                                <td th:text="${prod.marqueProd.name_marque}"></td>
+								<td th:text="${prod.category.name}"> </td>
+								<td th:text="${prod.castPrice_prod}+''+ 'DT' "></td>
+								<td><span class="badge bg-label-success me-1" th:text="${prod.quantity}+' ' + 'product'" ></span>
+								
+								</td>
+							
+                                <td>
+                               
+                                 
+                                    <a  th:if="${prod.is_activate==true}" th:href = "@{'/update_prod/'+${prod.id_prod}}" class="btn btn-primary">Update</a>
+                             
+                                </td>
+                                <td>
+                               <div th:if="${prod.is_activate==false}">
+                               <a  th:href = "@{'/enable-prod/'+${prod.id_prod}}" class="btn btn-success ">Active</a>
+                               
+                               </div>
+                              <div th:if="${prod.is_activate==true}">
+                                <a th:href = "@{'/delete-prod/'+${prod.id_prod}}" class="btn btn-danger ">Disactive</a>
+                          </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+               </div>
+                </div>
+              </div>
+                     
+
+
+                </div>
+            </div>
+
+
+
+
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-template="vertical-menu-template-free"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragment :: header">
+<body>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+    <div th:replace="fragment :: aside"></div>
+        <div class="layout-page">
+            <div th:replace="fragment :: navbar"></div>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Brand /</span> Update Brand
+                        </h4>
+
+                         <form th:action="@{/update-marq}"  method="POST" th:object="${marque}">                 
+              
+                <div class="col-md-10">
+                  <div class="card mb-6">
+                    <h5 class="card-header">Update Marque </h5>
+                    <div class="card-body">
+                      <div>
+                      <p class="alert alert-warning"> You can change only Name</p>
+                        <label  class="form-label">ID</label>
+                        <input   type="text" class="form-control"   name="id_marq" th:field="*{id_marq}" readonly="readonly"/>
+                       <label  class="form-label">Name</label>
+                        <input   type="text" class="form-control" name="name" th:field="*{name_marque}"/>
+                        <label for="defaultFormControlInput" class="form-label">IS Enabled</label>
+                        <input   type="text" class="form-control" name="isactive" th:field="*{isactive}"  readonly="readonly"/>
+                        <label for="defaultFormControlInput" class="form-label">IS Disabled </label>
+                        <input   type="text" class="form-control" 
+                        name="isdelete" th:field="*{isdelete}" readonly="readonly"/>
+                        <br>
+                       <button type="submit" class="btn btn-primary">Update</button>
+                        
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+                
+			</form>   
+
+
+                </div>
+            </div>
+            <div th:replace="fragment :: footer"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/category.js}"></script>
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>

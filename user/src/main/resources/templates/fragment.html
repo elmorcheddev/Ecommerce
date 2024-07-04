@@ -1,0 +1,178 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head">
+  <!-- Required meta tags -->
+        <!-- Title -->
+        <title th:text="${title}"></title>
+        <!-- Favicon  -->
+        <link rel="shortcut icon" th:href="@{/assets/images/fevicon.png}" />
+
+        <!-- *********** CSS Files *********** -->
+        <!-- Plugin CSS -->
+        <link rel="stylesheet" th:href="@{/assets/css/plugins.css}" />
+        <!-- Styles CSS -->
+        <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+        <link rel="stylesheet" th:href="@{/assets/css/responsive.css}" /> 
+</head>
+<body>
+            <header class="header bg-white" th:fragment="header">
+                <div class="container-fluid full-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Start Navigation -->
+                        <nav class="navigation navbar position-static navbar-expand-lg p-0 w-50">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"><span class="icon ti-menu"></span></button>        
+                            <div id="navbar-collapse" class="navbar-collapse collapse dual-nav">
+                                <a href="#" class="closeNav-btn d-lg-none clearfix" id="closeNav" title="Close"><span class="menu-close mr-2">Close</span><i class="ti-close" aria-hidden="true"></i></a>
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" th:href="@{/index}">Home</a>  
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/product}">Shop
+                                        </a>  
+                                    </li>
+                                   
+                                       <li class="nav-item dropdown">
+                                        <a class="nav-link" href="#">Find Product By<span class="arw plush" title="Click to show/hide"></span></a>  
+                                        <!-- Start Megamenu Dropdown -->
+                                        <div class="megamenu submenu dropdown">
+                                            <ul>
+                                               <li class="dropmenu">
+                                                    <a class="item" href="#">Category <span class="arw plush" title="Click to show/hide"></span></a>
+                                                    <ul class="droplink submenu1" >
+                                                        <li th:each="cat:${catactive}">
+                                                        <a class="item" th:href="@{/bycategory/{id_cat}(id_cat=${cat.id_cat})}"
+                                                        th:text="${cat.name}">
+                                                        </a>
+                                                        </li>
+                                                     </ul>
+                                                </li>
+                                                  <li class="dropmenu">
+                                                    <a class="item" href="#">Brand <span class="arw plush" title="Click to show/hide"></span></a>
+                                                    <ul class="droplink submenu1">
+                                                        <li  th:each="brand :${prodbrand}">
+                                                        <a class="item" th:href="@{/bybrand/{id_marq}(id_marq=${brand.id_marq})}"
+                                                        th:text="${brand.name_marque}">
+                                                        </a></li>
+                                                     </ul>
+                                                   </li>
+                                                </ul>
+                                                </div>         
+									</li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"  th:href="@{/about-us}">About Us</a>
+                                        </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link"  th:href="@{/contact-us}">Contact Us</a>  
+                                       </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/blog}">Blog</a>  
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- Start Navigation -->
+                        <!-- Start Logo -->
+                        <div class="navbar-brand logo mx-auto p-0 text-center">
+                            <a th:href="@{/index}" class="logo-img"><img class="img-fluid" th:src="@{/assets/images/logo/logo.png}" alt="logo" title="Posh Auto Parts" /></a>
+                        </div>
+                        <!-- End Logo -->
+                        <!-- Start Right Menu -->
+                        <div class="w-50 right-side">
+                            <!-- Start Minicart -->
+                            <div class="minicart float-right">
+                                <a th:href="@{/cart}" class="cart-btn">
+                                    <i class="icon ti-shopping-cart"></i>
+                                    <div class="cart-count">
+                                        <span id="count" ><p th:text="${session.totalitems == null ? '0' : session.totalitems}"></p></span>
+                                    </div>
+                                </a>
+                            </div>
+                         
+                            <!-- End Minicart -->
+                            <!-- Start Setting Menu -->
+                            
+                            <!-- End Setting Menu -->
+                 <div class="setting-menu float-right">
+                         <a href="#" class="setting-toggle" title="My Account"> 
+                                        
+                                    <i class="icon ti-settings">
+                                    </i>
+                         </a>
+                                <div class="settinglinks">
+                                    <!-- Menu Links -->
+                                    <div class="my-links">
+                                        <ul >
+                                          <li  th:if="${session.email != null}"><span><a th:text="${session.email}" th:href="@{/my-account}"></a></span></li>
+                                          <li th:if="${session.email != null} "><a th:href="@{/logout}">Logout</a></li>
+                                          <li th:if="${session.email == null} "><a th:href="@{/login}">Login</a></li>
+                                          <li th:if="${session.email == null} "><a th:href="@{/register}">Register</a></li>
+                                        
+                                        </ul>
+                                 </div>
+                       
+                        <!-- End Right Menu -->
+                                </div>
+                 </div>
+             
+            </header>
+			<footer class="footer" th:fragment="footer">
+                <div class="footer-top clearfix">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 logo-wellcome">
+                                <div class="ftr-logo">
+                                    <a href="index.html"><img class="img-fluid" src="assets/images/logo/gray-logo.png" alt="Posh Auto Parts" title="Posh Auto Parts" /></a>
+                                </div>
+                                <div class="welcome-text">
+                                </div>
+                                <div class="social-icons">
+                                    <ul class="d-flex flex-row align-items-center text-center">
+                                        <li><a href="#" title="Facebook"><i class="icon ti-facebook"></i></a></li>
+                                        <li><a href="#" title="Twitter"><i class="icon ti-twitter"></i></a></li>
+                                        <li><a href="#" title="Instagram"><i class="icon ti-instagram"></i></a></li>
+                                        <li><a href="#" title="Google Plus"><i class="icon ti-google"></i></a></li>
+                                        <li><a href="#" title="Youtube"><i class="icon ti-youtube"></i></a></li>
+                                        <li><a href="#" title="Vimeo"><i class="icon ti-vimeo"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-9 newsletter-menulinks">
+                                <div class="row no-gutters footer-newsletter">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <h3>Sign up to our Newsletter and receive 10% off your first order!</h3>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <form action="#" class="needs-validation" method="post">
+                                            <div class="form-group m-0 position-relative">
+                                                <input type="text" class="form-control" placeholder="Enter your email address..." required />
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fa fa-paper-plane-o"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters footer-links">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 menu-items">
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 menu-items">
+                                        
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom clearfix">
+                
+                </div>
+            </footer>
+		<th:block th:fragment="script">
+        <script th:src="@{/assets/js/plugins.js}"></script>
+
+        <script th:src="@{/assets/js/main.js}"></script>
+		</th:block>	
+</body>
+</html>

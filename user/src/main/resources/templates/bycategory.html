@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="https://www.thymeleaf.org/">
+    <head th:replace="fragment :: head"> </head>
+
+    <body class="template-index">
+      <header th:replace ="fragment :: header"></header>
+
+                <!-- Start Main Content -->
+            <main class="main-content">
+            
+                <div class="product-view-items product-grid">
+                    <div class="container">
+                    
+
+                        <!-- Start Products Grid -->
+                        <div class="products products-grid">
+                            <div class="row row-sp row-eq-height">
+                                <div class="col-sp col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6" th:each="prod:${prodcat}">
+                                   <form th:action="@{/addtocart}" method="post">
+                                
+                                    <div class="product-item">
+                                        <div class="product-image-action">
+                                            <div class="product-label">
+                                                <span class="label new">New</span>
+                                                <span class="label sale">Sale</span>
+                                            </div>
+                                            <div class="product-image">
+                                                <a th:href="@{/product-details/{id_prod}(id_prod=${prod.id_prod})}">
+                              						  <img  style="height :300px ; width:300px; " th:src="*{'data:image/jpeg;base64,' + {prod.image}}"> 
+                              						  <img class="img-fluid blur-up lazyload product-imghover" th:src="*{'data:image/jpeg;base64,' + {prod.image}}"  alt="image" title="image" />
+                                            </a>
+                                             <input type="hidden" th:value="${prod.id_prod}" name="id_prod">
+                                            
+                                            </div>
+                                            <div class="product-action">
+                                                <ul>
+                                                <li class="actions-addcart" data-toggle="tooltip" data-placement="top" title="add to cart">
+                                                <button type="submit"  class=" btn icon ti-shopping-cart"><i></i></button>
+                                                </li>
+                                                   
+                                                    <li ><a th:href="@{/product-details/{id_prod}(id_prod=${prod.id_prod})}" class="btn"><i class="icon ti-zoom-in"></i></a></li>
+                                               
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-details">
+                                            <h3 class="product-title" th:text="${prod.name_prod}"><a th:href="@{/product-details/{id_prod}(id_prod=${prod.id_prod})}"></a></h3>
+                                            <h4 class="product-vendor" th:text="${prod.marqueProd.name_marque}"></h4>                                       
+                                            <div class="product-price">
+                                                <span class="compare-price" th:text="${prod.castPrice_prod}"></span>
+                                                <span class="sale-price"th:text="${prod.castPrice_prod-100}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </form>
+                                </div>
+                                </div>
+
+                            <!-- Start Load More Button -->
+                            <div class="product-readmore text-center">
+                                <button type="submit" class="btn btn-secondary">Load More</button>
+                            </div>
+                            <!-- End Load More Button -->
+                        </div>
+                        <!-- End Products Grid -->
+
+                    </div>
+                </div>
+                <!-- End Products -->
+            </main>
+            <!-- End Main Content -->
+            <footer th:replace="fragment :: footer"></footer>
+
+            <!-- Start Scroll Top -->
+            <div id="scrollTop"><i class="ti-arrow-up"></i></div>
+            <!-- End Scroll Top -->
+
+            <!-- Start Search Drawer -->
+            <div class="search-area modal fade top" id="searchform" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+                <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+                    <div class="container">
+                        <div class="modal-content search-inline align-content-center">
+                            <div class="search-head position-relative">
+                                <h3>What are you looking for?</h3>
+                                <a class="search-close" data-dismiss="modal" aria-label="Close">
+                                    <i class="ti-close" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <form action="#" class="position-relative">
+                                <input type="text" class="form-control" placeholder="Search Products..." />
+                                <button class="search-btn" type="submit">
+                                    <i class="ti-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Overlay -->
+            <div class="overlay"></div>
+
+  
+             
+        <!-- Plugin JS -->	        
+        <script th:replace="fragment ::script"></script>
+
+    </body>
+</html>
+

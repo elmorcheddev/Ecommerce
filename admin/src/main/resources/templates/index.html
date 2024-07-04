@@ -1,0 +1,71 @@
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-template="vertical-menu-template-free"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragment :: header"></head>
+<body>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+    <div th:replace="fragment :: aside"></div>
+        <div class="layout-page">
+            <div th:replace="fragment :: navbar"></div>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="row">
+  					<div class="col-sm-6">
+                 <div class="card ">
+					  <h5 class="card-header">Product</h5>
+					  <div class="card-body">
+				    <h5 class="card-title"> <b>product statistics</b> </h5>
+				    <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width:10%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+<p class="card-text" th:text="${size}"></p>
+</div>
+         </div>
+			<br>		    
+					    <a th:href="@{/product}" class="btn btn-primary">Products</a>
+					  </div>
+					</div>
+					</div>
+					</div> 
+					<br>
+					   <div class="row">
+  					<div class="col-sm-6">
+					<div class="card">
+						  <h5 class="card-header">Category</h5>
+						  <div class="card-body">
+						    <h5 class="card-title">Category statistics</h5>
+						    <p class="card-text" th:text="${sizeCat}"></p>
+						    <a th:href="@{/category}" class="btn btn-primary">Categorys</a>
+						  </div>
+						</div>
+						</div>
+					</div>
+					<br>
+					   <div class="row">
+  					<div class="col-sm-6">
+					<div class="card">
+						  <h5 class="card-header">Brand Product</h5>
+						  <div class="card-body">
+						    <h5 class="card-title">Brand statistics</h5>
+						    <p class="card-text" th:text="${sizeM}"></p>
+						    <a th:href="@{/marque}" class="btn btn-primary">Categorys</a>
+						  </div>
+						</div>
+						</div>
+					</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>

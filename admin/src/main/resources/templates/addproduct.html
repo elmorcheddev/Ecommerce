@@ -1,0 +1,75 @@
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-template="vertical-menu-template-free"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragment :: header">
+<body>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+    <div th:replace="fragment :: aside"></div>
+        <div class="layout-page">
+            <div th:replace="fragment :: navbar"></div>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product  /</span> Add Product
+                        </h4>
+
+        <form th:action="@{/saveprod}" method="post" enctype="Multipart/form-data" th:object="${newprod}">                 
+              <div class="col-md-10">
+                  <div class="card">
+                    <h5 class="card-header"><i>Add New Product</i> </h5>
+                    <div class="card-body">
+                      <div>
+                        <label  class="form-label">Product Image </label>
+                        <input  name="imgprod" id="imgprod"  type="file" class="form-control" />
+                        
+                        <label  class="form-label">Product Name</label>
+                        <input   th:field="*{name_prod}" type="text" class="form-control" placeholder="enter product name ..." required="required"/>
+                        
+                        <label  class="form-label">Product price</label>
+                        <input  th:field="*{castPrice_prod}"  type="number" class="form-control" placeholder="price" required="required"/> 
+                                               
+                        <label  class="form-label">Product Quantity </label>
+                        <input  th:field="*{quantity}" type="number" class="form-control" placeholder="Quantity" required="required" />
+                        
+                        <label  class="form-label">Product Category </label>
+                        <select  th:field="*{category}"  class="form-control" >
+                        <option  th:value="null" >--select category--</option>
+                        <option  th:each="cat_act : ${categories}"
+                        		 th:value="${cat_act.id_cat}"
+                                 th:text="${cat_act.name}">
+                        </option>
+                        </select>
+                         <label  class="form-label">Product Brand </label>
+                        <select  th:field="*{marqueProd}"   class="form-control" >
+                        <option  th:value="null" >--select Brand--</option>
+                        <option  th:each="marqP : ${marqueProds}"
+                        		 th:value="${marqP.id_marq}"
+                                 th:text="${marqP.name_marque}">
+                        </option>
+                        </select>
+
+                        <label  class="form-label">Product Description  </label>
+                        <textarea th:field="*{description_prod}" placeholder="put description ..." class="form-control" ></textarea><br>                      
+                       <button type="submit" class=" from-control btn btn-primary">Add Product</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			</form>   
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>

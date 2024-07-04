@@ -1,0 +1,151 @@
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-template="vertical-menu-template-free"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragment :: header"></head>
+<body>
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <div th:replace="fragment :: aside"></div>
+        <div class="layout-page">
+            <div th:replace="fragment :: navbar"></div>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Category /</span> List Of All
+                        Category</h4>
+						<div  class="alert alert-success alert-dismissible fade show text-center" role="alert" th:if="${success}">
+						  <p th:text="${success}"></p>     
+						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						  </div>
+						  <div class="alert alert-danger alert-dismissible fade show text-center" role="alert"  th:if="${failed}">
+						  <p th:text="${failed}"></p> 
+						   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						  </div>
+              
+                    <div class="card">
+                    <div class="card-header">
+                     <h5>Category List<span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20"
+                       th:text="${size}"
+                       ></span></h5>
+						 <div class="col-lg-4 col-md-3">
+                     			 <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#backDropModal"
+                        >
+                          Add New Category
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                          <div class="modal-dialog">
+                            <form class="modal-content" th:action="@{/newcategory}"  method="post" th:object="${newCat}">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="backDropModalTitle">new category</h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameBackdrop" class="form-label">Name</label>
+                                    <input
+                                      type="text"
+                                       th:field="*{name}"
+                                      class="form-control"
+                                      placeholder="Enter Name"
+                                    />
+                                  </div>
+                                </div>
+                            
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                        <div th:if="${size==0}">
+                            <p class="alert alert-warning"> There's no category exist</p>
+                        </div>
+                        <div class="table-responsive text-nowrap">
+                        <table class="table card-table" th:if="${size>0}">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Etat</th>
+                                <th>Edit Category Name</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0" th:each="category :${categoryList}">
+                           <td th:text="${category.id_cat}">
+                          </td>
+                               
+                                <td th:text="${category.name}">
+                                </td>
+                                <td>
+                                   <div th:if="${category.is_active==true}">
+                                   <span class="badge bg-label-success me-1"  th:text="Active" ></span>
+                               </div>
+                                 <div th:if="${category.is_active==false}">
+                                <span class="badge bg-label-danger me-1" th:text="Desactive" ></span>
+                             </div>
+                             </td>
+                                <td >
+                                <DIV th:if="${category.is_active==true}">
+                                <a th:href = "@{/category/edit/{id_cat}(id_cat=${category.id_cat})}"
+                                     class="btn btn-primary">Update</a>
+                                     </DIV>
+                                    
+
+                                </td>
+                                <td>
+                                <div th:if="${category.is_active==true}">
+                            <a  th:href="@{'/delete/'+ ${category.id_cat}}" class="btn btn-danger ">Desactive</a>
+                             </div>
+                                 <div th:if="${category.is_active==false}">
+                            <a th:href="@{'/enable/'+ ${category.id_cat}}" class="btn btn-success">Active</a>
+                             </div>
+							</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        
+
+                    
+                          
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<script th:src="@{/js/category.js}"></script>
+<div th:replace="fragment :: script"></div>
+
+</body>
+</html>
